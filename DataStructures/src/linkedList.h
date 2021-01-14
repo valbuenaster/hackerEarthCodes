@@ -12,27 +12,67 @@
 #include <memory>
 using namespace std;
 
-struct Nd
+template<typename var>
+struct Node
 {
-	double data = 0.0;
-	shared_ptr<struct Nd> nextLink = nullptr;
-}typedef Node;
-
-
-class linkedList
-{
-	shared_ptr< Node > Head;
-
-public:
-	linkedList();
-	linkedList(double data);
-
-	void appendData(double data);
-	void printlinkedList();
-	void reverselinkedList();
-	~linkedList();
+	var data;
+	shared_ptr<Node> nextLink = nullptr;
 };
 
+template<typename var>
+class linkedList
+{
+	shared_ptr< Node<var> > Head;
 
+public:
+	linkedList()
+	{
+		this->Head = nullptr;
+	};
+
+	linkedList(var data)
+	{
+		this->Head = make_shared<Node<var>>();
+		this->Head->data = data;
+	};
+
+	void appendData(var data)
+	{
+		auto Temp = make_shared<Node<var>>();
+		Temp->data = data;
+		Temp->nextLink = this->Head;
+		this->Head = Temp;
+	};
+
+	void printlinkedList()
+	{
+		shared_ptr<Node<var>> Pointer = this->Head;
+		while(Pointer->nextLink != nullptr)
+		{
+			cout << Pointer->data << "   ";
+			Pointer = Pointer->nextLink;
+		}
+		cout << Pointer->data << endl;
+	};
+
+	void reverselinkedList(){
+		shared_ptr<Node<var>> Pointer = this->Head;
+		shared_ptr<Node<var>> goNext = nullptr;
+		shared_ptr<Node<var>> auxPointer = nullptr;
+
+		while(Pointer->nextLink != nullptr)
+		{
+			goNext = Pointer->nextLink;
+			Pointer->nextLink = auxPointer;
+			auxPointer = Pointer;
+			Pointer = goNext;
+		}
+		Pointer->nextLink = auxPointer;
+
+		this->Head = Pointer;
+	};
+
+	~linkedList(){};
+};
 
 #endif /* SRC_LINKEDLIST_H_ */

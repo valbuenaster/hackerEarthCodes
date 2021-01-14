@@ -13,9 +13,10 @@
 
 using namespace std;
 
-template<class T>
-T string2num(string & Str){
-	T retVal;
+template<class var>
+var string2num(string & Str)
+{
+	var retVal;
 	stringstream Var(Str);
 	Var >> retVal;
 	return retVal;
