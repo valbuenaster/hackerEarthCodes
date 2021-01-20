@@ -51,6 +51,29 @@ int main(int argc, char** argv)
 	cout << endl;
 	myList->printlinkedList();
 
+	cout << endl;
+	cout << endl;
+	cout << "Printing Tree ..." << endl;
+	myTree->printTree();
+
+	//NEED TO UPDATE THE NODES STORED BY LEVEL
+	unsigned int rem_ID = 0;
+	int rem_Data = 0;
+	cout << endl <<"Remove a node by ID" << endl;
+	cin >> rem_ID;
+	myTree->removeNodeByID(rem_ID);
+	cout << "Printing Tree ..." << endl;
+	myTree->printTree();
+
+	cout << endl <<"Remove a node by Data" << endl;
+	cin >> rem_Data;
+	myTree->removeNodeByData(rem_Data);
+	cout << "Printing Tree ..." << endl;
+	myTree->printTree();
+
+	cout << endl <<"Remove a node by ID and Data" << endl;
+	cin >> rem_ID >> rem_Data;
+	myTree->removeNode(rem_ID, rem_Data);
 	cout << "Printing Tree ..." << endl;
 	myTree->printTree();
 
